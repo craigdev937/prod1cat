@@ -33,6 +33,8 @@ import { prodRt } from "./routes/ProdRT";
     app.use(logger("dev"));
     app.use("/api/category", catRT);
     app.use("/api/product", prodRt);
+
+    
     app.use(ERR.notFound);
     app.use(ERR.errHandler)
 

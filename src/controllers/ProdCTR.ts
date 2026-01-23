@@ -7,8 +7,7 @@ class ProductClass {
         try {
             const P = ProdSchema.parse(req.body);
             const QRY = `INSERT INTO product 
-            (name, description, price, currency, 
-            quantity, active, category_id) 
+            (name, description, price, currency, quantity, active, category_id) 
             VALUES ($1, $2, $3, $4, $5, $6, $7) 
             RETURNING *`;
             const values = [P.name, P.description, P.price,

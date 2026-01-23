@@ -15,8 +15,8 @@ export const ProdSchema = z.object({
     name: z.string().min(1).max(120, { 
             message: "Name must be 120 characters or less!" 
         }),
-    description: z.string(),
-    price: z.number().min(10),
+    description: z.string().trim(),
+    price: z.number(),
     currency: z.string().min(1).max(5).default("USD"),
     quantity: z.number().default(0),
     active: z.boolean().default(true),
