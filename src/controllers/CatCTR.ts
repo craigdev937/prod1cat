@@ -53,6 +53,56 @@ class CategoryClass {
             return next(error);
         }
     };
+
+    GetOne: express.Handler = async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const QRY = `SELECT * FROM category WHERE id = $1`;
+            const values = [id];
+            const category = await dBase.query<CatType>(QRY, values);
+            return res
+                .status(res.statusCode)
+                .json(category.rows[0]);
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json({
+                    success: false,
+                    message: "Error Retriving Categories",
+                    error: error instanceof Error ?
+                        error.message : "Unknown Error!"
+                });
+            return next(error);
+        }
+    };
+
+    Update: express.Handler = async (req, res, next) => {
+        try {
+            const C = CatSchema.parse(req.body);
+            const { id } = req.params;
+            const QRY = `UPDATE category SET name = $1 
+            WHERE id = $2 RETURNING *`;
+            const values = [C.name, id];
+            const category = await dBase.query<CatType>(QRY, values);
+            return res
+                .status(res.statusCode)
+                .json({
+                    success: true,
+                    message: "Category Updated!",
+                    date: category.rows[0]
+                });
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json({
+                    success: false,
+                    message: "Error Retriving Categories",
+                    error: error instanceof Error ?
+                        error.message : "Unknown Error!"
+                });
+            return next(error);
+        }
+    };
 };
 
 export const CATEGORY: CategoryClass = new CategoryClass();
