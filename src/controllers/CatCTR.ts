@@ -103,6 +103,32 @@ class CategoryClass {
             return next(error);
         }
     };
+
+    Delete: express.Handler = async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const QRY = "DELETE FROM product WHERE id=$1";
+            const values = [id];
+            const deleteCat = await dBase.query<CatType>(QRY, values);
+            return res
+                .status(res.statusCode)
+                .json({
+                    success: true,
+                    message: "The Category was DeletedQ!",
+                    data: deleteCat
+                });
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json({
+                    success: false,
+                    message: "Error Retriving Categories",
+                    error: error instanceof Error ?
+                        error.message : "Unknown Error!"
+                });
+            return next(error);
+        }
+    };
 };
 
 export const CATEGORY: CategoryClass = new CategoryClass();

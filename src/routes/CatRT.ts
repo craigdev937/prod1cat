@@ -6,5 +6,6 @@ export const catRT: express.Router = express.Router();
     catRT.get("/", CATEGORY.FetchAll);
     catRT.get("/:id", CATEGORY.GetOne);
     catRT.put("/:id", CATEGORY.Update);
+    catRT.delete("/:id", CATEGORY.Delete);
 
 

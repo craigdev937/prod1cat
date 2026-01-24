@@ -115,8 +115,35 @@ class ProductClass {
             return next(error);
         }
     };
+
+    Delete: express.Handler = async (req, res, next) => {
+        try {
+            const { id } = req.params;
+            const QRY = "DELETE FROM product WHERE id=$1";
+            const values = [id];
+            const deleteProd = await dBase.query<ProdType>(QRY, values);
+            return res
+                .status(res.statusCode)
+                .json({
+                    success: true,
+                    message: "The Product was Deleted!",
+                    data: deleteProd
+                })
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json({
+                    success: false,
+                    message: "Error Retrieving Products!",
+                    error: error instanceof Error ?
+                        error.message : "Unknown Error!"
+                });
+            return next(error);
+        }
+    };
 };
 
 export const PRODUCT: ProductClass = new ProductClass();
+
 
 

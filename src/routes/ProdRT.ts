@@ -6,7 +6,7 @@ export const prodRt: express.Router = express.Router();
     prodRt.get("/", PRODUCT.FetchAll);
     prodRt.get("/:id", PRODUCT.GetOne);
     prodRt.put("/:id", PRODUCT.Update);
-    
+    prodRt.delete("/:id", PRODUCT.Delete);
 
 
     
