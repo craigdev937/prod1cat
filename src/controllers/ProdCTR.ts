@@ -7,10 +7,11 @@ class ProductClass {
         try {
             const P = ProdSchema.parse(req.body);
             const QRY = `INSERT INTO product 
-            (name, description, price, currency, quantity, active, category_id) 
-            VALUES ($1, $2, $3, $4, $5, $6, $7) 
+            (name, description, image, price, currency, 
+            quantity, active, category_id) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8) 
             RETURNING *`;
-            const values = [P.name, P.description, P.price,
+            const values = [P.name, P.description, P.image, P.price,
                 P.currency, P.quantity, P.active, P.category_id];
             const product = await dBase.query<ProdType>(QRY, values);
             return res
@@ -36,7 +37,7 @@ class ProductClass {
     FetchAll: express.Handler = async (req, res, next) => {
         try {
             const QRY = `SELECT p.id, p.name, p.description, 
-            p.price, p.currency, p.quantity, p.active, 
+            p.image, p.price, p.currency, p.quantity, p.active, 
             p.created_at, p.updated_at,
             (SELECT ROW_TO_JSON(category_obj) FROM (
                 SELECT id, name FROM category WHERE id = p.category_id
@@ -90,11 +91,11 @@ class ProductClass {
             const P = ProdSchema.parse(req.body);
             const { id } = req.params;
             const QRY = `UPDATE product 
-            SET name=$1, description=$2, price=$3, currency=$4, quantity=$5,
-            active=$6, category_id=$7, updated_at=CURRENT_TIMESTAMP 
-            WHERE id=$8 RETURNING *`;
-            const values = [P.name, P.description, P.price, P.currency,
-                P.quantity, P.active, P.category_id, id];
+            SET name=$1, description=$2, image=$3, price=$4, currency=$5, 
+            quantity=$6, active=$7, category_id=$8, 
+            updated_at=CURRENT_TIMESTAMP WHERE id=$9 RETURNING *`;
+            const values = [P.name, P.description, P.image, P.price, 
+                P.currency, P.quantity, P.active, P.category_id, id];
             const product = await dBase.query<ProdType>(QRY, values);
             return res
                 .status(res.statusCode)
@@ -159,7 +160,7 @@ class ProductClass {
                 })
             };
 
-            const QRY = `SELECT p.id, p.name, p.description, 
+            const QRY = `SELECT p.id, p.name, p.description, p.image,
             p.price, p.currency, p.quantity, p.active, 
             p.created_at, p.updated_at,
             (SELECT ROW_TO_JSON(category_obj) FROM (
