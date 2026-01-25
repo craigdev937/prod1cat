@@ -141,6 +141,49 @@ class ProductClass {
             return next(error);
         }
     };
+
+    ProdByCatID: express.Handler = async (req, res, next) => {
+        try {
+            const existsResult = await dBase.query({
+                text: `SELECT EXISTS 
+                    (SELECT * FROM category WHERE id=$1)`,
+                values: [req.params.catID]
+            });
+
+            if (!existsResult.rows[0].exists) {
+                return res
+                    .status(404)
+                    .json({
+                        success: false,
+                        error: "Category Not Found!"
+                })
+            };
+
+            const QRY = `SELECT p.id, p.name, p.description, 
+            p.price, p.currency, p.quantity, p.active, 
+            p.created_at, p.updated_at,
+            (SELECT ROW_TO_JSON(category_obj) FROM (
+                SELECT id, name FROM category WHERE id = p.category_id
+            ) category_obj) AS category
+            FROM product p
+            WHERE p.category_id = $1`;
+            const values = [req.params.catID];
+            const product = await dBase.query<ProdType[]>(QRY, values);
+            return res
+                .status(res.statusCode)
+                .json(product.rows);
+        } catch (error) {
+            res
+                .status(res.statusCode)
+                .json({
+                    success: false,
+                    message: "Error Retrieving Products!",
+                    error: error instanceof Error ?
+                        error.message : "Unknown Error!"
+                });
+            return next(error);
+        }
+    };
 };
 
 export const PRODUCT: ProductClass = new ProductClass();
