@@ -22,7 +22,9 @@ body {
     font-family: "Segoe UI";
 }
 
-
+main {
+    min-height: 80vh;
+}
 
 
 

@@ -1,5 +1,6 @@
 import React from "react";
 import "./Products.css";
+import { API } from "../../global/API";
 
 export const Products = () => {
     return (
