@@ -3,7 +3,7 @@ import "./Footer.css";
 export const Footer = () => {
     return (
         <footer className="footer">
-            <h3>Footer</h3>
+            <h3>Products and Categories 2026</h3>
         </footer>
     );
 };

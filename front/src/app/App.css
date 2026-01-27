@@ -2,9 +2,11 @@
     --white: oklch(100% 0.00011 271.152);
     --red: oklch(62.793% 0.25768 29.223);
     --pink: oklch(86.773% 0.07354 7.009);
+    --fuscha: rgb(199, 85, 201);
     --deekskyblue: oklch(75.536% 0.15349 231.667);
     --grey: oklch(74.624% 0.01594 277.736);
-    --dark: oklch(37.799% 0.05329 277.881);
+    --dark1: oklch(42.329% 0.05444 273.096);
+    --dark2: oklch(37.799% 0.05329 277.881);
     --border: oklch(28.094% 0.00003 271.152);
     --hover: oklch(21.779% 0.00002 271.152);
     --coal: oklch(14.479% 0.00002 271.152);
@@ -18,7 +20,8 @@
 }
 
 body {
-    background: var(--grey);
+    color: var(--white);
+    background: var(--hover);
     font-family: "Segoe UI";
 }
 

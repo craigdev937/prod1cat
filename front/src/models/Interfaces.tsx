@@ -6,6 +6,8 @@ export interface IData {
     currency: string,
     quantity: number,
     active: boolean,
+    created_at: string,
+    updated_at: string,
     category: {
         id: number,
         name: string
