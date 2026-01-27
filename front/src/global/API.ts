@@ -13,8 +13,43 @@ export const API = createApi({
                 url: "/",
                 method: "GET"
             }),
-            providesTags: ["Products"]
-        })
+            providesTags: (result) => result ? [
+                ...result.data.map(({ id }) => 
+                ({ type: "Products" as const, id })),
+                { type: "Products", id: "LIST" },
+            ] : [{ type: "Products", id: "LIST" }]
+        }),
+        one: builder.query<IProd, string>({
+            query: (id) => ({
+                url: `/${id}`,
+                method: "GET"
+            }),
+            providesTags: (result, error, id) => 
+                [{ type: "Products", id }]
+        }),
+        add: builder.mutation<IProd, IProd>({
+            query: (payload) => ({
+                url: "/",
+                method: "POST",
+                body: payload
+            }),
+            invalidatesTags: [{ type: "Products", id: "LIST" }]
+        }),
+        update: builder.mutation<IProd, IProd>({
+            query: ({id, ...payload}) => ({
+                url: `/${id}`,
+                method: "PUT",
+                body: payload
+            }),
+            invalidatesTags: [{ type: "Products", id: "LIST" }]
+        }),
+        delete: builder.mutation<void, string>({
+            query: (id) => ({
+                url: `/${id}`,
+                method: "DELETE"
+            }),
+            invalidatesTags: [{ type: "Products", id: "LIST" }]
+        }),
     })
 });
 

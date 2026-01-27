@@ -206,7 +206,6 @@
     outline-offset: 2px;
 }
 
-
 /* Image on the right */
 .prod__image {
     display: grid;
@@ -235,8 +234,9 @@
         grid-template-rows: auto 250px;
     }
 
+    /* Move image to top on small cards. */
     .prod__image {
-        order: -1;  // Move image to top on small cards.
+        order: -1;  
     }
 
     .prod__content h2 {

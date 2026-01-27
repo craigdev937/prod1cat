@@ -27,7 +27,10 @@ export const Products = () => {
                 <main className="prod">
                     <section className="prod__container">
                         {PR.data.map((prod) => (
-                            <article key={prod.id} className="prod__card">
+                            <article 
+                                key={prod.id} 
+                                className="prod__card"
+                            >
                                 <aside className="prod__content">
                                     <h2>{prod.name}</h2>
                                     <p>{prod.description}</p>
