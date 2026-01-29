@@ -1,0 +1,98 @@
+.form__container {
+    container-type: inline-size;
+    container-name: form;
+    max-width: 60rem;
+    margin-inline: auto;
+    padding: clamp(1rem, 3vw, 2.5rem);
+    background: var(--dark2);
+    border-radius: 0.75rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1rem, 2vw, 2rem);
+}
+
+/* The Sections use Subgrid. */
+.form__container section {
+    display: grid;
+    grid-template-columns: subgrid;
+    grid-column: 1 / -1;
+    gap: 0.35rem;
+}
+
+.form__container label {
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    color: var(--grey);
+}
+
+.form__container input {
+    padding: 0.6rem 0.75rem;
+    border-radius: 0.4rem;
+    color: var(--white);
+    background: var(--coal);
+    border: 1px solid var(--border);
+    outline: none;
+}
+
+.form__container input:is(:focus, :focus-visible) {
+    border-color: var(--deepskyblue);
+}
+
+section.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+section.checkbox label {
+    margin: 0;
+}
+
+/* ERROR HANDLING */
+.error {
+    font-size: 0.75rem;
+    color: var(--pink);
+}
+
+section:has(.error) input {
+    border-color: var(--red);
+}
+
+.form__btn {
+    justify-self: start;
+    margin-top: 1rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: var(--fuscha);
+    color: var(--white);
+    font-size: clamp(0.85rem, 1.5vw, 1rem);
+    cursor: pointer;
+}
+
+.form__btn:hover {
+    filter: brightness(1.1);
+}
+
+@container form (min-width: 35rem) {
+    .form__container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form__container section {
+        grid-column: span 1;
+    }
+
+    .form__container section:has(#description),
+    .form__container section:has(#image) {
+        grid-column: 1 / -1;
+    }
+}
+
+@container form (min-width: 50rem) {
+    .form__btn {
+        justify-self: end;
+    }
+}
+
+
+

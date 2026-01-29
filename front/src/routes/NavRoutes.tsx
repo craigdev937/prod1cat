@@ -4,6 +4,7 @@ import { createBrowserRouter,
 import { NotFound } from "../components/NotFound";
 import { Navbar } from "./Navbar";
 import { Products } from "../pages/prod/Products";
+import { AddProd } from "../containers/add/AddProd";
 import { Category } from "../pages/cat/Category";
 
 const RouteList = createBrowserRouter([
@@ -15,6 +16,10 @@ const RouteList = createBrowserRouter([
             {
                 path: "/",
                 element: <Products />
+            },
+            {
+                path: "/addprod",
+                element: <AddProd />
             },
             {
                 path: "/category",

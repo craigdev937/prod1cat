@@ -10,8 +10,11 @@ type Props = {
     onSubmit: (data: IData) => void
 };
 
-export const Form = 
-({ submitLabel = "Add Product", initialData, onSubmit }: Props) => {
+export const Form = ({ 
+    submitLabel = "Add Product", 
+    initialData, 
+    onSubmit 
+}: Props) => {
     const { register, handleSubmit, 
         formState: { errors } } = useForm<ProdType>({
         defaultValues: initialData || {
@@ -109,7 +112,7 @@ export const Form =
                 </span>}
             </section>
             <button 
-                className="btn"
+                className="form__btn"
                 type="submit" 
             >
                 {submitLabel}

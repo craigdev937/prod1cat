@@ -10,7 +10,7 @@ header.navbar {
     padding-right: 1rem;
     align-items: center;
     font-size: 1.2rem;
-    background: var(--deekskyblue);
+    background: var(--deepskyblue);
 }
 
 .nav__logo {
@@ -168,7 +168,7 @@ header.navbar {
     }
 
     .nav__menu.active {
-        background: var(--deekskyblue);
+        background: var(--deepskyblue);
         left: 0;
         opacity: 1;
         transform: all 0.5s ease;

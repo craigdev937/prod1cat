@@ -25,6 +25,10 @@ export const Products = () => {
                 <Spinner />
             ) : (
                 <main className="prod">
+                    <button 
+                        className="btn"
+                        >Add Product
+                    </button>
                     <section className="prod__container">
                         {PR.data.map((prod) => (
                             <article 
@@ -46,8 +50,8 @@ export const Products = () => {
                                         Category: {prod.category.name}
                                     </div>
                                     <div className="prod__meta">
-                                        <small>Created: {new Date(prod.created_at).toLocaleDateString()}</small>
-                                        <small>Updated: {new Date(prod.updated_at).toLocaleDateString()}</small>
+                                        <small>Created: {new Date(prod.created_at!).toLocaleDateString()}</small>
+                                        <small>Updated: {new Date(prod.updated_at!).toLocaleDateString()}</small>
                                     </div>
                                     <div className="prod__actions">
                                         <button 

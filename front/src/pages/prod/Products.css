@@ -113,7 +113,7 @@
     border-radius: 20px;
     font-size: 0.875rem;
     font-weight: 600;
-    background-color: var(--deekskyblue);
+    background-color: var(--deepskyblue);
 }
 
 .prod__category {
@@ -162,8 +162,8 @@
 
 .prod__actions .btn:first-child {
     color: var(--coal);
-    border-color: var(--deekskyblue);
-    background-color: var(--deekskyblue);
+    border-color: var(--deepskyblue);
+    background-color: var(--deepskyblue);
 }
 
 .prod__actions .btn:first-child:hover {
